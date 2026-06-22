@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个安静的页面入口 · c7c7.app</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f4f5f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #2a2d33;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 840px;
+            width: 100%;
+        }
+
+        /* hero 开场——留白与呼吸 */
+        .hero-short {
+            margin: 1.2rem 0 2.5rem 0;
+            font-size: 1.1rem;
+            letter-spacing: 0.01em;
+            border-left: 4px solid #b0b8c4;
+            padding-left: 1.2rem;
+            color: #373d46;
+        }
+
+        .hero-short p:first-child {
+            font-size: 1.4rem;
+            font-weight: 450;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-short .sub {
+            color: #585e68;
+            font-size: 0.95rem;
+        }
+
+        /* 卡片通用设计：浅灰背景、细边框、柔和阴影 */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+            padding: 2rem 2rem 1.8rem;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: #1f232a;
+            border-bottom: 1px solid #eeeff2;
+            padding-bottom: 0.6rem;
+        }
+
+        .card p, .card li {
+            font-size: 1rem;
+            color: #3b4049;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.75rem;
+        }
+
+        .card li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.3rem;
+            color: #7f8796;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .feature-item {
+            flex: 1 1 180px;
+            background: #f9fafb;
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #e8ebef;
+        }
+
+        .feature-item .label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.2rem;
+            color: #1f232a;
+        }
+
+        .feature-item .desc {
+            font-size: 0.9rem;
+            color: #565d69;
+        }
+
+        .scene-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .scene-tag {
+            background: #f2f4f8;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.9rem;
+            color: #3f4652;
+            border: 1px solid #e0e3e9;
+        }
+
+        .closing {
+            background: #f9fafc;
+            border: 1px solid #e2e5ec;
+            border-radius: 18px;
+            padding: 1.8rem 2rem;
+            margin: 1.2rem 0 2rem;
+            font-size: 0.98rem;
+            color: #3e4551;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .closing strong {
+            font-weight: 500;
+            color: #1f232a;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7d8390;
+            border-top: 1px solid #e2e5eb;
+            padding-top: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        a {
+            color: #2a4c7c;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: #2a4c7c;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 1rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .hero-short {
+                font-size: 1rem;
+                padding-left: 1rem;
+            }
+            .feature-grid {
+                flex-direction: column;
+            }
+            .closing {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 开场短句：留白，轻描淡写 -->
+    <div class="hero-short">
+        <p>有时候，一个入口就够了。</p>
+        <div class="sub">不需要多余的修饰，也不必反复解释。<br>你只是希望找到一个稳定、清晰的地方，然后开始。</div>
+    </div>
+
+    <!-- 承接段落：从稳定入口和页面说明的角度展开 -->
+    <div class="card">
+        <h2>一个页面，一个地址</h2>
+        <p>
+            很多服务的起点都藏在一串字符里。<strong>c7c7.app</strong> 就是其中一个。
+            它既不花哨，也不喧闹，只是一个网页——你打开，它就在那里。
+            没有夸张的欢迎页，也没有层层跳转，页面本身已经把该说的都说了。
+        </p>
+        <p style="margin-top: 0.8rem;">
+            你可以把它看作一个安静的起点。无论是日常使用，还是临时需要，
+            只要记住这个地址——<a href="https://web-c7c7.com">c7c7.app</a>——就够了。
+            页面结构清晰，加载直接，没有任何干扰性的弹窗或强制引导。
+        </p>
+    </div>
+
+    <!-- 特点列表：卡片+细致条目 -->
+    <div class="card">
+        <h2>它之所以让人安心，是因为</h2>
+        <ul>
+            <li>页面内容稳定，很少出现频繁改版或结构变动，熟悉之后每次访问都有一致的体验。</li>
+            <li>入口路径简洁：不需要记住复杂的子域名或参数，一个根地址就能覆盖主要功能。</li>
+            <li>跳转逻辑透明，每个链接都带着明确的指向性，不会在点击后感到意外。</li>
+            <li>整体设计偏向克制，没有多余动效或强制注册流程，访问成本几乎为零。</li>
+        </ul>
+
+        <div style="margin-top: 1.6rem;">
+            <div style="font-weight: 450; color: #1f232a; margin-bottom: 0.3rem;">常见的使用场景</div>
+            <div class="scene-flex">
+                <span class="scene-tag">快速查找</span>
+                <span class="scene-tag">日常参考</span>
+                <span class="scene-tag">轻量工具</span>
+                <span class="scene-tag">无干扰阅读</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 更细化的特点卡片（差异化） -->
+    <div class="card" style="padding-bottom: 1.5rem;">
+        <h2>几个值得留意的细节</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span class="label">直接访问</span>
+                <span class="desc">不需要中间页，也无需扫码或下载额外程序。</span>
+            </div>
+            <div class="feature-item">
+                <span class="label">页面轻量</span>
+                <span class="desc">资源加载克制，即使在网络一般的情况下也能快速呈现。</span>
+            </div>
+            <div class="feature-item">
+                <span class="label">信息连贯</span>
+                <span class="desc">页面内的引导顺序自然，减少来回翻找的疲劳感。</span>
+            </div>
+        </div>
+        <p style="font-size: 0.92rem; margin-top: 1rem; color: #49505c;">
+            这些细节单独看似乎微不足道，但放在一起，就构成了一个稳定、可靠的页面环境。
+            对于经常需要与特定页面打交道的人来说，这种一致性本身就是价值。
+        </p>
+    </div>
+
+    <!-- 简短 FAQ 摘要式区块（温和收束） -->
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="closing">
+            <strong>Q: 每次访问都需要重新输入完整地址吗？</strong><br>
+            未必。如果你把 <a href="https://web-c7c7.com">c7c7.app</a> 加入书签或浏览器常用栏，下次点击就能直接到达。地址本身也简短，手动输入并不费力。
+        </div>
+        <div class="closing">
+            <strong>Q: 页面内容会经常变化吗？</strong><br>
+            整体结构保持稳定，偶尔会有细微调整，但不会令你感到陌生。你可以把当前页面看作一个长期可靠的锚点。
+        </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div style="margin: 2rem 0 1rem; text-align: left; font-size: 0.98rem; color: #444b58; line-height: 1.6;">
+        <p>一个页面不需要承担太多角色，它只需要在需要的时候出现，然后安静地完成自己的工作。</p>
+        <p style="margin-top: 0.3rem;">如果你恰好需要这样一个地方，随时可以打开 <a href="https://web-c7c7.com">c7c7.app</a> ——它一直都在那里。</p>
+    </div>
+
+    <div class="footer-note">
+        <span>—— 页面简洁，入口稳定 ——</span>
+    </div>
+
+</div>
+</body>
+</html>
